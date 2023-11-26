@@ -5,9 +5,6 @@
     <link rel="stylesheet" href="styleguide.css" />
     <link rel="stylesheet" href="books.css" />
     <link rel="stylesheet" href="style.css" />
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
-    <link rel="stylesheet" href="https://ajax.googleapis.com/ajax/libs/jqueryui/1.13.2/themes/smoothness/jquery-ui.css">
-    <script src="https://ajax.googleapis.com/ajax/libs/jqueryui/1.13.2/jquery-ui.min.js"></script>
     <script src="functions.js"></script>
   </head>
   <body>
@@ -82,7 +79,7 @@
                   <div class="home"><div class="text-wrapper-11">Home</div></div>
                   <div class="interest"><div class="text-wrapper-11">Interest</div></div>
                   <div class="course"><div class="text-wrapper-11">Course</div></div>
-                  <div class="cart"></div>
+                  <div class="cart" onclick="loadCart();"></div>
                   <img class="big-logo" src="img/big-logo.png" />
                 </div>
               </div>
@@ -192,7 +189,7 @@
               $diff_result = $diff_result . '; &nbsp;&nbsp;&nbsp;';
               
               echo '<div class="results">' . $your_query . $maj_result . $diff_result . 'Number of books that matches: ' . 
-                  count($books) . '</div>';
+              count($books) . '</div>';
               foreach($books as $row => $book) {
                 echo '<div class="box">';
                 echo '<div class="book-preview">';
@@ -206,7 +203,9 @@
                 echo '<div class="subject">Subject: ' . $book['book_Subject'] . '</div>';
                 echo '<div class="property"><div class="text-wrapper-31">$' . $book['book_Price'] . '</div></div>';
                 echo '<div class="property-add-cart">';
-                echo '<div class="add-cart"><button class="div2">Add to Cart</button></div>';
+                echo '<div class="add-cart"><button id="cart' . $book['book_ISBN'] . '" class="div2" onclick="addToCart(' . "'" . 
+                $book['book_Title'] . "', " . $book['book_Price'] . ", '" . $book['book_ISBN'] . "'" . 
+                ');">Add to Cart</button></div>';
                 echo '</div>';
                 echo '</div>';
                 echo '</div>';

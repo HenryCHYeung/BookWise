@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <link rel="stylesheet" href="globals.css" />
+    <link rel="stylesheet" href="styleguide.css" />
+    <link rel="stylesheet" href="cart.css" />
+    <script src="functions.js"></script>
+  </head>
+  <body onload="showCart();">
+    <div class="pop-chart-info">
+      <div class="overlap-wrapper">
+        <div class="overlap">
+          <div class="drop-down"></div>
+          <div class="check-out-now">
+            <div class="overlap-group">
+              <div class="div" id="totalPrice"></div>
+              <div class="rectangle"><div class="text-wrapper" onclick="showShopModal();">Check Out Now</div></div>
+            </div>
+          </div>
+          <div class="frame-2">
+            <div class="rectangle-2"></div>
+            <div class="items">
+              <div class="overlap-group-2">
+                <div class="rectangle-3"></div>
+                <div class="text-wrapper-3">Item(s)</div>
+              </div>
+            </div>
+          </div>
+          <div class="books" id="bookList"></div>
+          <div class="group">
+            <div class="overlap-2">
+              <div class="rectangle-4"></div>
+              <div class="text-wrapper-4">Your Cart</div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div id="shopModal" class="modal">
+      <div class="modal-content">
+        <span class="close" onclick="closeShopModal();">&times;</span>
+        <div class="thanks">
+          <div class="overlap-group-wrapper">
+            <div class="overlap-group2">
+              <div class="rectangle2"></div>
+              <div class="frame3">
+                <div class="thank-your-for">Thank You <br />For Purchasing</div>
+              </div>
+            </div>
+          </div>
+          <a href="index.php"><div class="home"><div class="text-wrapper-5">Home</div></div></a>
+        </div>
+      </div>
+    </div>
+  </body>
+</html>

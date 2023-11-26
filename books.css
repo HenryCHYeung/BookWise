@@ -502,6 +502,7 @@
   background-image: url(./img/cart.png);
   background-size: cover;
   background-position: 50% 50%;
+  cursor: pointer;
 }
 
 .adv-search .big-logo {
@@ -509,7 +510,7 @@
   width: 125px;
   height: 144px;
   top: 0;
-  left: 126px;
+  left: 100px;
   object-fit: cover;
 }
 
@@ -710,7 +711,7 @@
   text-decoration-skip-ink: none;
   letter-spacing: 0;
   line-height: 100px;
-  overflow:hidden;
+  overflow: hidden;
   white-space: nowrap;
   text-overflow: ellipsis;
   cursor: pointer;
