@@ -76,7 +76,7 @@
             <div class="overlap-3">
               <div class="top-links">
                 <div class="links">
-                  <div class="home"><div class="text-wrapper-11">Home</div></div>
+                  <a href="index.php"><div class="home"><div class="text-wrapper-11">Home</div></div></a>
                   <div class="interest"><div class="text-wrapper-11">Interest</div></div>
                   <div class="course"><div class="text-wrapper-11">Course</div></div>
                   <a href="cart.html"><div class="cart"></div></a>
