@@ -79,7 +79,7 @@
                   <div class="home"><div class="text-wrapper-11">Home</div></div>
                   <div class="interest"><div class="text-wrapper-11">Interest</div></div>
                   <div class="course"><div class="text-wrapper-11">Course</div></div>
-                  <div class="cart" onclick="loadCart();"></div>
+                  <a href="cart.html"><div class="cart"></div></a>
                   <img class="big-logo" src="img/big-logo.png" />
                 </div>
               </div>

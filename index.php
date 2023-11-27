@@ -6,7 +6,7 @@
     <link rel="stylesheet" href="style.css" />
     <script src="functions.js"></script>
   </head>
-  <body>
+  <body onload="initialize();">
     <div class="index">
       <div class="overlap-wrapper">
         <div class="overlap">

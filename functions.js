@@ -1,4 +1,6 @@
-let list_books = [];
+function initialize() {
+    sessionStorage.setItem('list_of_books', JSON.stringify([]));
+}
 
 function searchModal() {
     var modal = document.getElementById("myModal");
@@ -21,20 +23,18 @@ function closeBookModal(isbn) {
 }
 
 function addToCart(book_name, book_price, isbn) {
+    var list_books = JSON.parse(sessionStorage.getItem('list_of_books'));
     var cart_button = document.getElementById("cart" + isbn);
     cart_button.disabled = true;
     cart_button.innerHTML = "Added to Cart";
     cart_button.style.cursor = "default";
     list_books.push({bookName: book_name, price: book_price});
-}
-
-function loadCart() {
     sessionStorage.setItem('list_of_books', JSON.stringify(list_books));
-    window.location.href = "cart.html";
 }
 
 function showCart() {
-    var got_list = JSON.parse(sessionStorage.getItem('list_of_books'));
+    var book_list = JSON.parse(sessionStorage.getItem('list_of_books'));
+    var got_list = [...new Map(book_list.map(item => [item['bookName'], item])).values()]
     cart_list = "";
     total_price = 0;
     price_display = document.getElementById("totalPrice");
