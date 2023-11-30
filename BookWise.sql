@@ -1,14 +1,15 @@
-DROP TABLE Textbooks;
+CREATE DATABASE IF NOT EXISTS BookWise;
+USE BookWise;
 
 CREATE TABLE IF NOT EXISTS Textbooks
 (
     book_ISBN           VARCHAR(14)         PRIMARY KEY,
-    book_Title          VARCHAR(255)        NOT NULL,
-    book_Authors        VARCHAR(255)        NOT NULL,
+    book_Title          VARCHAR(MAX)        NOT NULL,
+    book_Authors        VARCHAR(MAX)        NOT NULL,
     book_Edition        INT                 NOT NULL,
     book_Subject        VARCHAR(50)         NOT NULL,
     book_Major          VARCHAR(50)         NOT NULL,
-    book_Desc           VARCHAR(255)        NOT NULL,
+    book_Desc           VARCHAR(MAX)        NOT NULL,
     book_Publisher      VARCHAR(50)         NOT NULL,
     book_Year           INT                 NOT NULL,
     book_Rating         NUMERIC(2, 1)       NOT NULL,
@@ -16,7 +17,45 @@ CREATE TABLE IF NOT EXISTS Textbooks
     book_level          INT                 NOT NULL
 );
 
-INSERT OR REPLACE INTO Textbooks VALUES
+CREATE TABLE IF NOT EXISTS Admins
+(
+    admin_id            INT                 PRIMARY KEY             AUTO-INCREMENT,
+    admin_username      VARCHAR(20)         NOT NULL,
+    admin_password      VARCHAR(50)         NOT NULL
+);
+
+CREATE TABLE IF NOT EXISTS Users
+(
+    users_id            INT                 PRIMARY KEY             AUTO-INCREMENT,
+    username            VARCHAR(20)         NOT NULL,
+    user_password       VARCHAR(50)         NOT NULL,
+);
+
+CREATE TABLE IF NOT EXISTS Admin_logs
+(
+    admin_log_id        INT                 PRIMARY KEY             AUTO-INCREMENT,
+    admin_id            INT                 NOT NULL,
+    log_date            DATE                NOT NULL,
+    log_time            TIME                NOT NULL,
+    admin_record        VARCHAR(MAX)        NOT NULL,
+
+    CONSTRAINT admin_fk FOREIGN KEY (admin_id)
+        REFERENCES Admins (admin_id)
+);
+
+CREATE TABLE IF NOT EXISTS Shop_logs
+(
+    shop_log_id         INT                 PRIMARY KEY             AUTO-INCREMENT,
+    users_id            INT                 NOT NULL,
+    shop_date           DATE                NOT NULL,
+    shop_time           TIME                NOT NULL,
+    shop_record         VARCHAR(MAX)        NOT NULL,
+
+    CONSTRAINT user_fk FOREIGN KEY (users_id)
+        REFERENCES Users (users_id)
+);
+
+INSERT INTO Textbooks VALUES
 ('978-0134686974', 'Precalculus: Concepts Through Functions', 'Michael Sullivan', 4, 'Precalculus', 'Math', 
     'A comprehensive precalculus textbook.', 'Pearson', 2018, 4.4, 57.00, 100),
 ('978-0321982384', 'Linear Algebra and Its Applications', 'David Lay, Steven Lay, Judi McDonald', 5, 'Linear Algebra', 'Math',
@@ -62,3 +101,57 @@ INSERT OR REPLACE INTO Textbooks VALUES
     'McGraw Hill', 2013, 4.3, 66.40, 100),
 ('978-1133187790', 'Introduction to the Theory of Computation', 'Michael Sipser', 3, 'Theory of Computation', 'Computer Science',
     'An introductory textbook on theoretical computational theory topics.', 'Cengage Learning', 2012, 4.3, 49.60, 300);
+
+INSERT INTO Admins (admin_username, admin_password) VALUES
+('first_admin', '123abc45'),
+('second_admin', '34566k4wgf'),
+('third_admin', 'kjldlnzsf'),
+('fourth_admin', '123908onb'),
+('fifth_admin', 'kgngufhsa'),
+('sixth_admin', 'vbfyeuifh'),
+('seventh_admin', 'puf8bjhsn'),
+('eighth_admin', 'fdfytugaa'),
+('ninth_admin', 'abc123456'),
+('tenth_admin', '9876554yjj');
+
+INSERT INTO Users (username, user_password) VALUES
+('first_user', 'password_1'),
+('second_user', 'password_2'),
+('third_user', 'password_3'),
+('fourth_user', 'password_4'),
+('fifth_user', 'password_5'),
+('sixth_user', 'password_6'),
+('seventh_user', 'password_7'),
+('eighth_user', 'password_8'),
+('ninth_user', 'password_9'),
+('tenth_user', 'password_10');
+
+INSERT INTO Admin_logs (admin_id, log_date, log_time, admin_record) VALUES
+(1, '2023-11-30', '12:43:00', 'Added new Calculus textbook'),
+(1, '2023-11-30', '18:59:00', 'Deleted a Calculus textbook'),
+(2, '2023-12-01', '09:36:54', 'Added new Computer Architecture textbook'),
+(5, '2023-11-30', '12:43:00', 'Added new textbook info'),
+(10, '2023-12-03', '15:23:10', 'Added Data Structure textbook'),
+(7, '2023-11-30', '12:43:00', 'Removed a Database textbook'),
+(8, '2023-11-29', '16:40:24', 'Added new subject Algebra'),
+(6, '2023-12-02', '11:23:40', 'Added new Algebra textbook'),
+(1, '2023-12-03', '08:33:20', 'Added new info for Algebra textbook'),
+(1, '2023-12-04', '13:02:05', 'Edited info for Algebra textbook');
+
+INSERT INTO Shop_logs (users_id, shop_date, shop_time, shop_record) VALUES
+(1, '2023-11-30', '18:23:00', 'Purchased 1 textbook'),
+(3, '2023-11-29', '20:13:30', 'Refunded 1 textbook'),
+(1, '2023-11-30', '17:26:42', 'Purchased 5 textbooks'),
+(9, '2023-12-01', '12:13:46', 'Ordered an Algorithms textbook'),
+(8, '2023-12-02', '14:03:32', 'Contacted customor support'),
+(1, '2023-11-30', '18:23:00', 'Purchased 3 textbooks'),
+(2, '2023-12-03', '15:45:03', 'Refunded 2 textbooks'),
+(3, '2023-12-04', '08:13:09', 'Purchased 3 textbooks'),
+(4, '2023-12-02', '10:25:30', 'Ordered 4 textbooks'),
+(5, '2023-12-01', '14:43:10', 'Purchased 1 textbook'),
+
+CREATE VIEW AS
+    SELECT * FROM Textbooks WHERE book_Major = 'MATH' AND book_level = 100;
+
+CREATE VIEW AS
+    SELECT * FROM Admin_logs WHERE log_date = '2023-11-30';
