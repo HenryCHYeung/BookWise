@@ -29,6 +29,7 @@ CREATE TABLE IF NOT EXISTS Users
     users_id            INT                 PRIMARY KEY             AUTO-INCREMENT,
     username            VARCHAR(20)         NOT NULL,
     user_password       VARCHAR(50)         NOT NULL,
+    user_history        VARCHAR(max)
 );
 
 CREATE TABLE IF NOT EXISTS Admin_logs
@@ -148,7 +149,7 @@ INSERT INTO Shop_logs (users_id, shop_date, shop_time, shop_record) VALUES
 (2, '2023-12-03', '15:45:03', 'Refunded 2 textbooks'),
 (3, '2023-12-04', '08:13:09', 'Purchased 3 textbooks'),
 (4, '2023-12-02', '10:25:30', 'Ordered 4 textbooks'),
-(5, '2023-12-01', '14:43:10', 'Purchased 1 textbook'),
+(5, '2023-12-01', '14:43:10', 'Purchased 1 textbook');
 
 CREATE VIEW AS
     SELECT * FROM Textbooks WHERE book_Major = 'MATH' AND book_level = 100;
