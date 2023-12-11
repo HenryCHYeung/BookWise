@@ -4,12 +4,12 @@ USE BookWise;
 CREATE TABLE IF NOT EXISTS Textbooks
 (
     book_ISBN           VARCHAR(14)         PRIMARY KEY,
-    book_Title          VARCHAR(MAX)        NOT NULL,
-    book_Authors        VARCHAR(MAX)        NOT NULL,
+    book_Title          VARCHAR(255)        NOT NULL,
+    book_Authors        VARCHAR(255)        NOT NULL,
     book_Edition        INT                 NOT NULL,
     book_Subject        VARCHAR(50)         NOT NULL,
     book_Major          VARCHAR(50)         NOT NULL,
-    book_Desc           VARCHAR(MAX)        NOT NULL,
+    book_Desc           VARCHAR(255)        NOT NULL,
     book_Publisher      VARCHAR(50)         NOT NULL,
     book_Year           INT                 NOT NULL,
     book_Rating         NUMERIC(2, 1)       NOT NULL,
@@ -19,26 +19,26 @@ CREATE TABLE IF NOT EXISTS Textbooks
 
 CREATE TABLE IF NOT EXISTS Admins
 (
-    admin_id            INT                 PRIMARY KEY             AUTO-INCREMENT,
+    admin_id            INT                 PRIMARY KEY             AUTO_INCREMENT,
     admin_username      VARCHAR(20)         NOT NULL,
     admin_password      VARCHAR(50)         NOT NULL
 );
 
 CREATE TABLE IF NOT EXISTS Users
 (
-    users_id            INT                 PRIMARY KEY             AUTO-INCREMENT,
+    users_id            INT                 PRIMARY KEY             AUTO_INCREMENT,
     username            VARCHAR(20)         NOT NULL,
     user_password       VARCHAR(50)         NOT NULL,
-    user_history        VARCHAR(max)
+    user_history        VARCHAR(255)
 );
 
 CREATE TABLE IF NOT EXISTS Admin_logs
 (
-    admin_log_id        INT                 PRIMARY KEY             AUTO-INCREMENT,
+    admin_log_id        INT                 PRIMARY KEY             AUTO_INCREMENT,
     admin_id            INT                 NOT NULL,
     log_date            DATE                NOT NULL,
     log_time            TIME                NOT NULL,
-    admin_record        VARCHAR(MAX)        NOT NULL,
+    admin_record        VARCHAR(255)        NOT NULL,
 
     CONSTRAINT admin_fk FOREIGN KEY (admin_id)
         REFERENCES Admins (admin_id)
@@ -46,11 +46,11 @@ CREATE TABLE IF NOT EXISTS Admin_logs
 
 CREATE TABLE IF NOT EXISTS Shop_logs
 (
-    shop_log_id         INT                 PRIMARY KEY             AUTO-INCREMENT,
+    shop_log_id         INT                 PRIMARY KEY             AUTO_INCREMENT,
     users_id            INT                 NOT NULL,
     shop_date           DATE                NOT NULL,
     shop_time           TIME                NOT NULL,
-    shop_record         VARCHAR(MAX)        NOT NULL,
+    shop_record         VARCHAR(255)        NOT NULL,
 
     CONSTRAINT user_fk FOREIGN KEY (users_id)
         REFERENCES Users (users_id)
@@ -151,8 +151,8 @@ INSERT INTO Shop_logs (users_id, shop_date, shop_time, shop_record) VALUES
 (4, '2023-12-02', '10:25:30', 'Ordered 4 textbooks'),
 (5, '2023-12-01', '14:43:10', 'Purchased 1 textbook');
 
-CREATE VIEW AS
+CREATE VIEW userView AS
     SELECT * FROM Textbooks WHERE book_Major = 'MATH' AND book_level = 100;
 
-CREATE VIEW AS
+CREATE VIEW adminView AS
     SELECT * FROM Admin_logs WHERE log_date = '2023-11-30';
